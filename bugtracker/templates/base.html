@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+ 
+<html>
+<head>
+   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+{% load static %}
+</head>
+<body>
+    <title>Bugtracker - {% block title_block %}{% endblock %} </title>
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'index' %}">Bugtracker</a>
+        </div>
+        <div class="navbar-collapse collapse">
+               <ul class="nav navbar-nav navbar-right">
+                   {% if user.is_authenticated %}
+                    <li class="navbar-text">Welcome, {{ user.username }}!</li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                   {% else %}
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                   {% endif %}
+               </ul>
+               <ul class="nav  navbar-nav navbar-left">
+                   {% if user.is_authenticated %}
+                    <li><a href="{% url 'add' %}">Add bugreport</a></li>
+                   {% endif %}
+               </ul>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <hr>
+<div class="content container">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="col-lg-3 ">
+            <div class="well sidebar-nav">
+                <ul>
+                  <li><a href="#">Menu 1</a></li>
+                  <li><a href="#">Menu 2</a></li>
+                  <li><a href="#">Menu 3</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            {% block content_block %}
+            {% endblock %}
+        </div>
+      </div>
+    </div>
+</div>
+ </body>
+
+ 
+</html>
